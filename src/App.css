@@ -1,0 +1,312 @@
+@import url("https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@700&display=swap");
+
+.header {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.body {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.goback {
+  margin-top: 33%;
+  margin-left: 15px;
+}
+
+.mine {
+  width: 100%;
+  height: 100vh;
+  border: 1px solid black;
+}
+.buy {
+  width: 100%;
+  height: 100vh;
+  border: 1px solid black;
+}
+
+.container {
+  padding-top: 5px;
+  width: 100%;
+  background-image: url("./oldpaper.png");
+  background-size: cover !important;
+}
+
+.Pick {
+  width: 30vw;
+  height: 30vw;
+}
+
+.Pick:active {
+  animation-name: spin;
+  animation-duration: 100ms;
+  animation-timing-function: linear;
+}
+.Pick:hover {
+  cursor: pointer;
+}
+
+.miner {
+  margin-top: 50%;
+  display: flex;
+}
+
+.list * {
+  height: calc(85vh / 6);
+  font-family: PrehistoricCaveman;
+}
+
+.rock-wrapper {
+  display: flex;
+  align-items: flex-end;
+}
+
+.rock-wrapper img:nth-child(1),
+.rock-wrapper img:nth-child(2) {
+  position: absolute;
+}
+.rock-wrapper img:nth-child(2) {
+  clip-path: polygon(
+    42% 24%,
+    61% 30%,
+    36% 55%,
+    47% 75%,
+    32% 85%,
+    47% 100%,
+    100% 100%,
+    100% 0,
+    56% 0
+  );
+}
+.rock-wrapper img:nth-child(1) {
+  clip-path: polygon(
+    42% 24%,
+    61% 30%,
+    36% 55%,
+    47% 75%,
+    32% 85%,
+    47% 100%,
+    0 100%,
+    0 0,
+    56% 0
+  );
+}
+
+.rock-wrapper img:nth-child(1):focus {
+  animation-name: crack1;
+}
+
+.rock-wrapper img:nth-child(2):focus {
+  animation-name: crack2;
+}
+
+@keyframes crack1 {
+  0% {
+    transform: translate(0%, 0%);
+  }
+  100% {
+    transform: translate(-10%, 1%) rotateZ(-20deg);
+  }
+}
+
+@keyframes crack2 {
+  0% {
+    transform: translate(0%, 0%);
+  }
+  100% {
+    transform: translate(10%, -1%) rotateZ(10deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(45deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.Rock {
+  width: 15vw;
+  height: 15vw;
+}
+
+.coin {
+  margin-top: 1px;
+  margin-bottom: 1px;
+  font-family: PrehistoricCaveman;
+  font-weight: 0.1;
+  font-size: 50px;
+}
+
+.dph {
+  margin: 1%;
+  font-family: PrehistoricCaveman;
+  width: 95% !important;
+  border-radius: 10px;
+  padding: 1%;
+}
+
+.coin-wrapper {
+  display: flex;
+
+  justify-content: center;
+  border: 1px solid black;
+  /* border-radius: 100px; */
+  width: 100%;
+  background-color: #f0cc00;
+}
+
+.Rock:active {
+  display: inline-block;
+  margin: 0 0.5rem;
+
+  animation: bounce; /* referring directly to the animation's @keyframe declaration */
+  animation-duration: 0.1s; /* don't forget to set a duration! */
+}
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
+  }
+
+  40% {
+    -webkit-transform: translateY(-15px);
+    -ms-transform: translateY(-15px);
+    transform: translateY(-15px);
+  }
+
+  60% {
+    -webkit-transform: translateY(0px);
+    -ms-transform: translateY(0px);
+    transform: translateY(0px);
+  }
+}
+@font-face {
+  font-family: "PrehistoricCaveman";
+  src: local("PrehistoricCaveman"),
+    url("./fonts/PrehistoricCaveman-PRJ7.ttf") format("truetype");
+  font-weight: normal;
+}
+
+@media only screen and (min-width: 952px) {
+  .miner {
+    margin-top: 25%;
+  }
+}
+
+@media only screen and (min-width: 1062px) {
+  .goback {
+    margin-top: 13%;
+  }
+}
+
+/* Boss page */
+
+.boss-wrapper {
+  height: 100vh;
+  background-image: url("./oldpaper.png");
+  background-size: cover !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.peeps-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.attack {
+  box-sizing: border-box;
+  appearance: none;
+  background-color: transparent;
+  border: 2px solid #e74c3c;
+  border-radius: 0.6em;
+  color: #e74c3c;
+  cursor: pointer;
+  display: flex;
+  align-self: center;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1;
+  margin: 20px;
+  padding: 1.2em 2.8em;
+  text-decoration: none;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+  outline: none;
+}
+
+.attack:hover {
+  color: #fff;
+  outline: 0;
+  box-shadow: 0 0 40px 40px #e74c3c inset;
+}
+
+.person img {
+  height: 50vh;
+  width: 40vw;
+}
+
+.person {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  align-items: center;
+}
+
+.trophy {
+  background-color: transparent;
+}
+
+/* Mars Page */
+
+.mars-container {
+  padding-top: 5px;
+  width: 100%;
+  background-image: url("./mars_surface.jpg");
+  background-size: cover !important;
+}
+
+.rocket {
+  width: 9.5vw;
+  height: 18vw;
+}
+
+.rocket:active {
+  animation-name: spin;
+  animation-duration: 100ms;
+  animation-timing-function: linear;
+}
+.rocket:hover {
+  cursor: pointer;
+}
+
+.mars-miner {
+  display: flex;
+  margin: 10%;
+}
+
+.astronaut {
+  width: 15vw;
+}
+
+.mars-buy {
+  background-color: wheat;
+}
