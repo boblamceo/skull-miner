@@ -103,7 +103,7 @@ const Boss = () => {
         }}
       >
         {" "}
-        ATTACK
+        GAIN EXTRA LIVES
       </button>
 
       <Dialog
@@ -137,7 +137,10 @@ const Boss = () => {
       </Dialog>
       <Dialog
         open={trophy}
-        onClose={() => setYouWin(false)}
+        onClose={() => {
+          setYouWin(false);
+          setLocation("/mars");
+        }}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
         style={{ fontSize: 100 }}

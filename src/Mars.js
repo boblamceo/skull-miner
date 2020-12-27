@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import pick from "./rocket.png";
 import rock from "./mars-rock.png";
@@ -49,6 +49,8 @@ function Mars() {
     window.location.href = "/boss-battle";
   };
 
+  console.log("hi", sessionStorage.getItem("key"));
+
   document.cookie = `points=${coin};addCoins=${addCoins};oof=0;`;
   return (
     <div className={"mars-container"}>
@@ -68,8 +70,8 @@ function Mars() {
               src={astronaut}
               className="astronaut"
               onClick={() => {
-                // alert("Ouch! Why you hit your helper?");
-                // setAddCoins(1);
+                alert("Ouch! Why you hit your helper?");
+                setAddCoins(1);
               }}
             ></img>
             <img

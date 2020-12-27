@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import pick from "./pick.png";
 import rock from "./rock.png";
@@ -13,24 +13,46 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import "./fonts/PrehistoricCaveman-PRJ7.ttf";
-import { getCookie } from "./functions";
 import { useLocation } from "wouter";
 import rocket from "./rocket.png";
 
 function Main() {
-  if (!Number(getCookie("addCoins"))) {
-    document.cookie = `addCoins=${Number(getCookie("addCoins")) + 1}`;
+  const get = (item) => {
+    localStorage.getItem(item);
+  };
+  const set = (item, value) => {
+    localStorage.setItem(item, value);
+  };
+
+  if (!get("hasVisited")) {
+    set("coin", 0);
+    set("addCoin", 2);
+    set("hasRocket", false);
   }
 
-  const [coin, setCoin] = useState(getCookie("points"));
-  const [addCoins, setAddCoins] = useState(Number(getCookie("addCoins")));
+  set("hasVisited", true);
+
+  const [coin, setCoin] = useState(!get("coin") ? 0 : get("coin"));
+  const [addCoins, setAddCoins] = useState(
+    !get("addCoin") ? 1 : get("addCoin"),
+  );
 
   const [open, setOpen] = useState(false);
   const [launch, setLaunch] = useState(false);
   const [hasRocket, setHasRocket] = useState(
-    JSON.parse(getCookie("hasRocket")),
+    !get("hasRocket") ? false : get("hasRocket"),
   );
   const [location, setLocation] = useLocation();
+
+  localStorage.setItem("coin", coin);
+  localStorage.setItem("addCoin", addCoins);
+  localStorage.setItem("hasRocket", hasRocket);
+
+  console.log({
+    coin: [coin, get("coin")],
+    addCoins: [addCoins, get("addCoin")],
+    hasRocket: [hasRocket, get("hasRocket")],
+  });
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -45,18 +67,18 @@ function Main() {
   };
 
   const kill = () => {
-    document.cookie = "points=0;addCoins=1;hasRocket=false;oof=0";
-    document.location.reload();
+    setAddCoins(1);
+    setCoin(0);
+    setHasRocket(false);
+    window.location.reload();
   };
 
   const killBoss = () => {
+    setHasRocket(true);
     setLaunch(false);
     window.location.href = "/boss-battle";
   };
 
-  console.log(getCookie("addCoins"));
-
-  document.cookie = `addCoins=${addCoins};points=${coin};hasRocket=${hasRocket}oof=0;`;
   return (
     <div className={"container"}>
       <div className={"header"}>
@@ -73,7 +95,9 @@ function Main() {
             <img
               src={pick}
               className="Pick"
-              onClick={() => setCoin(`${Number(coin) + Number(addCoins)}`)}
+              onClick={() => {
+                setCoin(`${Number(coin) + Number(addCoins)}`);
+              }}
             ></img>
             <div className="rock-wrapper">
               <img
@@ -88,7 +112,7 @@ function Main() {
               ></img>
             </div>
           </div>
-          {getCookie("hasRocket") ? (
+          {hasRocket ? (
             <img src={rocket} width={50} onClick={goBack}></img>
           ) : null}
         </div>
@@ -157,7 +181,7 @@ function Main() {
                   handleClickOpen();
                   return;
                 }
-                document.cookie = "hasRocket=true;";
+                setHasRocket(true);
                 setCoin(coin - 10000);
                 setLaunch(true);
               }}
